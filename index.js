@@ -19,5 +19,3 @@ function renderInventory(inventory)
     }
   }
 }
-
-//Create helper functions if needed
