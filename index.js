@@ -1,57 +1,37 @@
-function listAllBlackShoes(inventory) 
-{
- var flatList = '';
- 
- // iterate through the inventory object
- for(var index = 0; index < inventory.length; index++)
- {
-   var currentDesignerName = inventory[index]['name'];
-   var currentShoeArray = inventory[index]['shoes'];
-   
-   for(var shoeIndex = 0; shoeIndex < currentShoeArray.length; shoeIndex++)
-   {
-     var currentShoeType = currentShoeArray[shoeIndex]['name'];
-     var currentShoePrice = currentShoeArray[shoeIndex]['price'];
-     
-     if(currentShoeType.includes('black'))
-     {
-       if(shoeIndex === currentShoeArray.length - 1)
+ffunction findLacedWords(Inventory)
+{// accumulator
+  var resultArray = [];
+  
+  // iterate through the inventory to look at each shoe name
+  for(var index = 0; index < Inventory.length; index++)
+  {
+    var currentShoeObject = Inventory[index]['shoes'];
+    // iterate through every shoe type in the shoe object
+    for(var shoeNameIndex = 0; shoeNameIndex < currentShoeObject.length; shoeNameIndex++)
+    {
+      var currentShoe = currentShoeObject[index]['name'];
+      
+      if(currentShoe.includes('lace'))
+      {
+       var currentShoeToArray = currentShoe.split('');
+       var newObject = {};
+      
+       newObject['nameWords'] = currentShoeToArray;
+      
+       // iterate through the currentShoeToArray to find a match for the word 'lace'
+       for(var shoeToArrayIndex = 0; shoeToArrayIndex < currentShoeToArray.length; shoeToArrayIndex+
        {
-         flatList += currentDesignerName + ', ' + currentShoeType + ', ' + currentShoePrice;
-         continue;
+         var currentShoeToArrayItem = currentShoeToArray[shoeToArrayIndex];
+         var currentIndex = shoeToArrayIndex;
+        
+         if(currentShoeToArrayItem.includes('lace'))
+         {
+           newObject['targetWordIndex'] = currentIndex;
+         }
        }
-       else
-       {
-         flatList += currentDesignerName + ', ' + currentShoeType + ', ' + currentShoePrice + '\n'; 
-       }
+       resultArray.push(newObject);
+      }// end of if statement
      }
-   }      
-  } 
-  return flatList;
-}
-
-//Create helper functions if needed
-
-var currentInventory = [
-  {
-    name: 'Brunello Cucinelli',
-    shoes: [
-      {name: 'tasselled black low-top lace-up', price: 1000},
-      {name: 'tasselled green low-top lace-up', price: 1100},
-      {name: 'plain beige suede moccasin', price: 950},
-      {name: 'plain olive suede moccasin', price: 1050}
-    ]
-  },
-  {
-    name: 'Gucci',
-    shoes: [
-      {name: 'red leather laced sneakers', price: 800},
-      {name: 'black leather laced sneakers', price: 900}
-    ]
   }
-];
-
-var expected =  listAllBlackShoes(currentInventory);
-
-console.log(expected);
-
+  return resultArray;
+}
