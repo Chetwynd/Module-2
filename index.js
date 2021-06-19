@@ -1,32 +1,36 @@
-function renderInventory(inventory) 
+function calculateAveragePricePerDesigner(inventory) 
 {
- var flatList = '';
+ // accumulators
+ var averageCostOfShoesObject = {};
+ var designerAveragePriceArray = [];
+
+ // iterate through the inventory object to access each item
  
- //access itens in the object and create a list
  for(var index = 0; index < inventory.length; index++)
  {
-   var currentDesignerName = inventory[index]['name'];
-   var currentObjectsShoeArray = inventory[index]['shoes'];
-   
-   // access items in the shoe array
-   for(var innerIndex = 0; innerIndex < currentObjectsShoeArray.length; innerIndex++)
+   var currentDesigner = inventory[index]['name'];
+   var currentShoesObject = inventory[index]['shoes'];
+   var averagePrice = 0;
+   var shoeCount = 0;
+   var sum = 0;
+   var newObject = {};
+  
+   for(var priceIndex = 0; priceIndex < currentShoesObject.length; priceIndex++)
    {
-     var currentShoeName = currentObjectsShoeArray[innerIndex]['name'];
-     var currentShoePrice = currentObjectsShoeArray[innerIndex]['price'];
-
-     if(index === inventory.length - 1 && innerIndex === currentObjectsShoeArray.length - 1)
-     {
-      flatList += currentDesignerName + ', ' + currentShoeName + ', ' + currentShoePrice;
-      continue;
-     }
-     else
-     {
-      flatList += currentDesignerName + ', ' + currentShoeName + ', ' + currentShoePrice + '\n';
-     }
-     
+      sum += currentShoesObject[priceIndex]['price'];
+      shoeCount++;
    }
+   averagePrice = sum / shoeCount;
+   
+   newObject['name'] = currentDesigner;
+   newObject['averagePrice'] = averagePrice;
+   
+   designerAveragePriceArray.push(newObject);
  }
- console.log(flatList);
+ 
+ averageCostOfShoesObject['designers'] = designerAveragePriceArray;
+ 
+ return averageCostOfShoesObject;
 }
 
 var currentInventory = [
@@ -48,4 +52,7 @@ var currentInventory = [
   }
 ];
 
-renderInventory(currentInventory);
+var expected =  calculateAveragePricePerDesigner(currentInventory);
+
+console.log(expected);
+
