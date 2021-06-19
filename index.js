@@ -1,37 +1,36 @@
-function calculateAveragePricePerDesigner(inventory) 
+function listAllBlackShoes(inventory) 
 {
- // accumulators
- var averageCostOfShoesObject = {};
- var designerAveragePriceArray = [];
-
- // iterate through the inventory object to access each item
+ var flatList = '';
  
+ // iterate through the inventory object
  for(var index = 0; index < inventory.length; index++)
  {
-   var currentDesigner = inventory[index]['name'];
-   var currentShoesObject = inventory[index]['shoes'];
-   var averagePrice = 0;
-   var shoeCount = 0;
-   var sum = 0;
-   var newObject = {};
-  
-   for(var priceIndex = 0; priceIndex < currentShoesObject.length; priceIndex++)
+   var currentDesignerName = inventory[index]['name'];
+   var currentShoeArray = inventory[index]['shoes'];
+   
+   for(var shoeIndex = 0; shoeIndex < currentShoeArray.length; shoeIndex++)
    {
-      sum += currentShoesObject[priceIndex]['price'];
-      shoeCount++;
-   }
-   averagePrice = sum / shoeCount;
-   
-   newObject['name'] = currentDesigner;
-   newObject['averagePrice'] = averagePrice;
-   
-   designerAveragePriceArray.push(newObject);
- }
- 
- averageCostOfShoesObject['designers'] = designerAveragePriceArray;
- 
- return averageCostOfShoesObject;
+     var currentShoeType = currentShoeArray[shoeIndex]['name'];
+     var currentShoePrice = currentShoeArray[shoeIndex]['price'];
+     
+     if(currentShoeType.indexOf('black'))
+     {
+       if(index === inventory.length - 1 && shoeIndex === currentShoeArray.length - 1)
+       {
+         flatList += currentDesignerName + ', ' + currentShoeType + ', ' + currentShoePrice;
+         continue;
+       }
+       else
+       {
+         flatList += currentDesignerName + ', ' + currentShoeType + ', ' + currentShoePrice + '\n'; 
+       }
+     }
+   }      
+  } 
+  return flatList;
 }
+
+//Create helper functions if needed
 
 var currentInventory = [
   {
@@ -52,7 +51,7 @@ var currentInventory = [
   }
 ];
 
-var expected =  calculateAveragePricePerDesigner(currentInventory);
+var expected =  listAllBlackShoes(currentInventory);
 
 console.log(expected);
 
