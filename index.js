@@ -13,9 +13,9 @@ function listAllBlackShoes(inventory)
      var currentShoeType = currentShoeArray[shoeIndex]['name'];
      var currentShoePrice = currentShoeArray[shoeIndex]['price'];
      
-     if(currentShoeType.indexOf('black'))
+     if(currentShoeType.includes('black'))
      {
-       if(index === inventory.length - 1 && shoeIndex === currentShoeArray.length - 1)
+       if(shoeIndex === currentShoeArray.length - 1)
        {
          flatList += currentDesignerName + ', ' + currentShoeType + ', ' + currentShoePrice;
          continue;
