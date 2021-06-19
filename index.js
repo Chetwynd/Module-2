@@ -1,4 +1,4 @@
-ffunction findLacedWords(Inventory)
+function findLacedWords(Inventory)
 {// accumulator
   var resultArray = [];
   
@@ -19,12 +19,13 @@ ffunction findLacedWords(Inventory)
        newObject['nameWords'] = currentShoeToArray;
       
        // iterate through the currentShoeToArray to find a match for the word 'lace'
-       for(var shoeToArrayIndex = 0; shoeToArrayIndex < currentShoeToArray.length; shoeToArrayIndex+
+       for(var shoeToArrayIndex = 0; shoeToArrayIndex < currentShoeToArray.length; shoeToArrayIndex++)
        {
-         var currentShoeToArrayItem = currentShoeToArray[shoeToArrayIndex];
+         var currentShoeArrayItem = currentShoeToArray[shoeToArrayIndex];
          var currentIndex = shoeToArrayIndex;
         
-         if(currentShoeToArrayItem.includes('lace'))
+         var currentShoeArrayItem = currentShoeToArray[shoeToArrayIndex];
+         if(currentArrayItem.includes('lace'))
          {
            newObject['targetWordIndex'] = currentIndex;
          }
