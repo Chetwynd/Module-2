@@ -18,3 +18,7 @@ var duplicateZeros = function(arr)
   }
   return arr;
  }
+
+var array = [1,0,2,3,0,4,5,0];
+
+duplicateZeros(array);
